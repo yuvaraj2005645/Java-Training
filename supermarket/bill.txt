@@ -1,0 +1,7 @@
+===== SUPERMARKET BILL =====
+Grocery Total : Rs. 135.0
+Fruits Total  : Rs. 100.0
+Dairy Total   : Rs. 0.0
+-----------------------------
+Grand Total   : Rs. 235.0
+Thank you for shopping!

@@ -1,3 +1,4 @@
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class supermarket {
@@ -19,7 +20,7 @@ public class supermarket {
             System.out.println("2. Fruits");
             System.out.println("3. Dairy Products");
             System.out.println("4. GrandTotal");
-            System.out.println("5. Exit");
+            System.out.println("5. Show bill on File");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
 
@@ -104,19 +105,73 @@ public class supermarket {
                     System.out.println("Grand Total   : Rs. " + grandTotal);
                     
                     break;
+                
+                /*case 5:
+                    grandTotal = groceryTotal + fruitsTotal + dairyTotal;
+
+                    try {
+                        FileWriter writer = new FileWriter("bill.txt");
+
+                        writer.write("===== SUPERMARKET BILL =====\n");
+                        writer.write("Grocery Total: Rs. " + groceryTotal + "\n");
+                        writer.write("Fruits Total: Rs. " + fruitsTotal + "\n");
+                        writer.write("Dairy Total: Rs. " + dairyTotal + "\n");
+                        writer.write("Grand Total: Rs. " + grandTotal + "\n");
+                        writer.write("Thank you for shopping!\n");
+
+                        writer.close();
+
+                        System.out.println("Bill created successfully!");
+                        System.out.println("File location: " +
+                                new java.io.File("bill.txt").getAbsolutePath());
+
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    break;*/
+    
+
+        case 5:
+            grandTotal = groceryTotal + fruitsTotal + dairyTotal;
+
+            try {
+                FileWriter writer = new FileWriter("bill.txt");
+
+                writer.write("===== SUPERMARKET BILL =====\n");
+                writer.write("Grocery Total : Rs. " + groceryTotal + "\n");
+                writer.write("Fruits Total  : Rs. " + fruitsTotal + "\n");
+                writer.write("Dairy Total   : Rs. " + dairyTotal + "\n");
+                writer.write("-----------------------------\n");
+                writer.write("Grand Total   : Rs. " + grandTotal + "\n");
+                writer.write("Thank you for shopping!\n");
+
+                writer.close();
+
+                ProcessBuilder pb = new ProcessBuilder(
+                    "notepad.exe",
+                    new java.io.File("bill.txt").getAbsolutePath()
+                );
+                pb.start();
+
+                System.out.println("Bill opened in Notepad!");
+
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            break;
+                
+                
 
                 default:
                     System.out.println("Invalid category!");
-                case 5:
-                    System.out.println("Thank you for shopping!");
-                    more = 'n';
+                break;
             }
 
-            if (choice != 4) {
+            if (choice == 4 || choice == 5) {
+                more = 'n';
+            } else {
                 System.out.print("Do you want to add another item? (y/n): ");
                 more = sc.next().charAt(0);
-            } else {
-                more = 'n';
             }
 
         } while (more == 'y' || more == 'Y');
